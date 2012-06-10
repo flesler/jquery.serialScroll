@@ -1,0 +1,66 @@
+[Enhancement]
+- Removed a redundant code
+- If there's no matched container ('target') serialScroll just ignores the call.
+- The setting 'interval' implicitely assumes 'force' as true.
+[Fix]
+- The setting 'stop' wasn't working on window.
+
+1.2.2
+[Enhancement]
+- Removed the check that avoids re-scrolling to the same index, this might be desirable sometimes.
+- The settings object is exposed in the onBefore as the 'this'.
+
+1.2.1
+[Feature]
+- Added option 'exclude' to indicate the plugin to exclude some elements from the scrolling items.
+[Enhancement]
+- If less items than 'step' are missing, the plugin will firstly show those, and then cycle or not.
+- When cycling, the option 'step' is ignored, and the step is 1. So after the last, comes the 1st and the other way around.
+
+1.2.0
+[Feature]
+- You can notify SerialScroll that the active item changed, by using the event notify.serialScroll.
+- Thanks to the event notify, this plugin can be now closely integrated with LocalScroll(1.2.5 or higher).
+- Also, thanks to notify, you can call SerialScroll on the same element more than once, and they interact nicely.
+- You can specify the option 'target', and then the matched elements become the context of all the selectors,
+	and target matches the element to be scrolled. This allows you to call SerialScroll on many element at the same time.
+- You can combine the options 'jump' and 'lazy' (not adviced if no target is specified).
+- LocalScroll and SerialScroll are so compatible, that they can use the same hash of settings.
+- Added option 'constant'(true by default), specifies whether the speed must be constant or not.
+- Added option 'navigation' to add a group of element to jump to the items.
+[Fix]
+- If you call the plugin on the same (scrollable)element more than once, the custom events get bound only in the first call.
+[Change]
+- The event 'start' no longer receives the interval, you must set it at start, stop/start only pause/restart.
+
+1.1.2
+[Fix]
+- The next handler was receiving event type 'next' and as target the container.
+
+1.1.1
+[Feature]
+- Added events start and stop, to manage the autoscrolling.
+[Fix]
+- The step can be negative, to go in the other way, before it would mess up the duration.
+
+1.1.0
+[Change]
+- Relicensed from GPL to GPL+MIT.
+[Optimization]
+- The animation is skipped if a bad position was received or it's the same as the actual. Saving some overhead.
+[Feature]
+- The plugin binds 3 events to the container to allow external manipulation.
+  * prev.serialScroll, next.serialScroll, goto.serialScroll.
+  You use them like this: $(your_container).trigger('next'), $(your_container).trigger('goto', [5]) (0-based index).
+  If for some odd reason, the element already has any of these events bound, trigger with the namespace.
+- Added 2 more arguments to the onBefore callback: actual item collection, index of the actual item in the collection.
+- Added option 'interval', can be a number specifying the amount of milliseconds for autoscrolling.
+  
+
+1.0.1
+[Feature]
+- if 'onBefore' returns false, the plugin will ignore the event.
+- Added option 'lazy'.
+
+1.0.0
+- First release.

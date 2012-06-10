@@ -1,0 +1,294 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+	<title>jQuery.SerialScroll</title>
+	<meta name="keywords" content="javascript, jquery, plugins, scroll, navigation, slideshow, news, ticker, sections, sequential, prev, next, series, scrollTo, smooth, to, animation, overflow, element, window, effect, ariel, flesler, customizable" />
+	<meta name="description" content="Demo of jQuery.SerialScroll. A jQuery plugin to quickly animate series of items, made by Ariel Flesler." />
+	<meta name="robots" content="index,follow" />
+	<link type="text/css" rel="stylesheet" href="css/style.css" />
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.1/jquery.min.js"></script>
+	<script type="text/javascript" src="../jquery.scrollTo.js"></script>
+	<script type="text/javascript" src="../jquery.serialScroll.js"></script>
+	<script type="text/javascript">	
+		// Easing equation, borrowed from jQuery easing plugin
+		// http://gsgd.co.uk/sandbox/jquery/easing/
+		jQuery.easing.easeOutQuart = function (x, t, b, c, d) {
+			return -c * ((t=t/d-1)*t*t*t - 1) + b;
+		};
+		
+		jQuery(function( $ ){
+			/**
+			 * Most jQuery.serialScroll's settings, actually belong to jQuery.ScrollTo, check it's demo for an example of each option.
+			 * @see http://flesler.demos.com/jquery/scrollTo/
+			 * You can use EVERY single setting of jQuery.ScrollTo, in the settings hash you send to jQuery.serialScroll.
+			 */
+			
+			/**
+			 * The plugin binds 6 events to the container to allow external manipulation.
+			 * prev, next, goto, start, stop and notify
+			 * You use them like this: $(your_container).trigger('next'), $(your_container).trigger('goto', [5]) (0-based index).
+			 * If for some odd reason, the element already has any of these events bound, trigger it with the namespace.
+			 */		
+			
+			/**
+			 * IMPORTANT: this call to the plugin specifies ALL the settings (plus some of jQuery.ScrollTo)
+			 * This is done so you can see them. You DON'T need to specify the commented ones.
+			 * A 'target' is specified, that means that #screen is the context for target, prev, next and navigation.
+			 */
+			$('#screen').serialScroll({
+				target:'#sections',
+				items:'li', // Selector to the items ( relative to the matched elements, '#sections' in this case )
+				prev:'img.prev',// Selector to the 'prev' button (absolute!, meaning it's relative to the document)
+				next:'img.next',// Selector to the 'next' button (absolute too)
+				axis:'xy',// The default is 'y' scroll on both ways
+				navigation:'#navigation li a',
+				duration:700,// Length of the animation (if you scroll 2 axes and use queue, then each axis take half this time)
+				force:true, // Force a scroll to the element specified by 'start' (some browsers don't reset on refreshes)
+				
+				//queue:false,// We scroll on both axes, scroll both at the same time.
+				//event:'click',// On which event to react (click is the default, you probably won't need to specify it)
+				//stop:false,// Each click will stop any previous animations of the target. (false by default)
+				//lock:true, // Ignore events if already animating (true by default)		
+				//start: 0, // On which element (index) to begin ( 0 is the default, redundant in this case )		
+				//cycle:true,// Cycle endlessly ( constant velocity, true is the default )
+				//step:1, // How many items to scroll each time ( 1 is the default, no need to specify )
+				//jump:false, // If true, items become clickable (or w/e 'event' is, and when activated, the pane scrolls to them)
+				//lazy:false,// (default) if true, the plugin looks for the items on each event(allows AJAX or JS content, or reordering)
+				//interval:1000, // It's the number of milliseconds to automatically go to the next
+				//constant:true, // constant speed
+				
+				onBefore:function( e, elem, $pane, $items, pos ){
+					/**
+					 * 'this' is the triggered element 
+					 * e is the event object
+					 * elem is the element we'll be scrolling to
+					 * $pane is the element being scrolled
+					 * $items is the items collection at this moment
+					 * pos is the position of elem in the collection
+					 * if it returns false, the event will be ignored
+					 */
+					 //those arguments with a $ are jqueryfied, elem isn't.
+					e.preventDefault();
+					if( this.blur )
+						this.blur();
+				},
+				onAfter:function( elem ){
+					//'this' is the element being scrolled ($pane) not jqueryfied
+				}
+			});
+			
+			/**
+			 * No need to have only one element in view, you can use it for slideshows or similar.
+			 * In this case, clicking the images, scrolls to them.
+			 * No target in this case, so the selectors are absolute.
+			 */
+			
+			$('#slideshow').serialScroll({
+				items:'li',
+				prev:'#screen2 a.prev',
+				next:'#screen2 a.next',
+				offset:-230, //when scrolling to photo, stop 230 before reaching it (from the left)
+				start:1, //as we are centering it, start at the 2nd
+				duration:1200,
+				force:true,
+				stop:true,
+				lock:false,
+				cycle:false, //don't pull back once you reach the end
+				easing:'easeOutQuart', //use this easing equation for a funny effect
+				jump: true //click on the images to scroll to them
+			});
+			
+			/**
+			 * The call below, is just to show that you are not restricted to prev/next buttons
+			 * In this case, the plugin will react to a custom event on the container
+			 * You can trigger the event from the outside.
+			 */
+			
+			var $news = $('#news-ticker');//we'll re use it a lot, so better save it to a var.
+			$news.serialScroll({
+				items:'div',
+				duration:2000,
+				force:true,
+				axis:'y',
+				easing:'linear',
+				lazy:true,// NOTE: it's set to true, meaning you can add/remove/reorder items and the changes are taken into account.
+				interval:1, // yeah! I now added auto-scrolling
+				step:2 // scroll 2 news each time
+			});	
+			
+			/**
+			 * The following you don't need to see, is just for the "Add 2 Items" and "Shuffle"" buttons
+			 * These exemplify the use of the option 'lazy'.
+			 */
+			$('#add-news').click(function(){
+				var 
+					$items = $news.find('div'),
+					num = $items.length + 1;
+					
+				$items.slice(-2).clone().find('h4').each(function(i){
+					$(this).text( 'News ' + (num + i) );
+				}).end().appendTo($news);
+			});
+			$('#shuffle-news').click(function(){//don't shuffle the first, don't wanna deal with css
+				var shuffled = $news.find('div').get().slice(1).sort(function(){
+					return Math.round(Math.random())-0.5;//just a random number between -0.5 and 0.5
+				});
+				$(shuffled).appendTo($news);//add them all reordered
+			});
+		});
+	</script>
+	<style type="text/css">
+
+	</style>
+</head>
+<body>
+	<h1>jQuery.SerialScroll&nbsp;<strong>by Ariel Flesler</strong></h1>
+	<div id="screen">
+		<img class="prev" src="img/prev.gif" alt="prev" width="42" height="53" />
+		<div id="navigation">
+			<ul>
+				<li><a href="#">Section 1</a></li>
+				<li><a href="#">Section 3</a></li>
+				<li><a href="#">Section 5</a></li>
+			</ul>
+		</div>
+		<div id="sections">
+			<ul>
+				<li>
+					<h2>Section 1</h2>
+					<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Suspendisse et turpis sed metus fermentum pellentesque. Vestibulum auctor neque ac nunc elementum malesuada. Praesent non est sed libero vestibulum consectetuer. Sed vehicula. Vivamus quis tellus sit amet erat ultrices luctus. Fusce a ligula. Fusce viverra libero vitae velit. Aenean bibendum nibh non lorem. Suspendisse quis velit. Integer sit amet lacus. Curabitur tristique. Morbi eu lectus. Vestibulum tristique aliquam quam. Sed neque.</p>
+					<p>Nulla facilisi. Quisque eleifend libero. Sed eros. Morbi vel leo. Morbi varius tincidunt sem. Nam sodales volutpat velit. Suspendisse potenti. Duis vehicula pede non nisi. Proin elit pede, ultrices non, ultrices quis, vulputate sit amet, magna. Praesent sodales pellentesque justo. Donec blandit, augue id convallis congue, magna libero hendrerit erat, id blandit est lorem a tellus. Vestibulum tincidunt lectus quis metus. Pellentesque placerat lacus in urna.</p>
+				</li>
+				<li>
+					<h2>Section 2</h2>
+					<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Suspendisse et turpis sed metus fermentum pellentesque. Vestibulum auctor neque ac nunc elementum malesuada. Praesent non est sed libero vestibulum consectetuer. Sed vehicula. Vivamus quis tellus sit amet erat ultrices luctus. Fusce a ligula. Fusce viverra libero vitae velit. Aenean bibendum nibh non lorem. Suspendisse quis velit. Integer sit amet lacus. Curabitur tristique. Morbi eu lectus. Vestibulum tristique aliquam quam. Sed neque.</p>
+					<p>Nulla facilisi. Quisque eleifend libero. Sed eros. Morbi vel leo. Morbi varius tincidunt sem. Nam sodales volutpat velit. Suspendisse potenti. Duis vehicula pede non nisi. Proin elit pede, ultrices non, ultrices quis, vulputate sit amet, magna. Praesent sodales pellentesque justo. Donec blandit, augue id convallis congue, magna libero hendrerit erat, id blandit est lorem a tellus. Vestibulum tincidunt lectus quis metus. Pellentesque placerat lacus in urna.</p>
+				</li>
+				<li class="fallen">
+					<h2>Section 3</h2>
+					<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Suspendisse et turpis sed metus fermentum pellentesque. Vestibulum auctor neque ac nunc elementum malesuada. Praesent non est sed libero vestibulum consectetuer. Sed vehicula. Vivamus quis tellus sit amet erat ultrices luctus. Fusce a ligula. Fusce viverra libero vitae velit. Aenean bibendum nibh non lorem. Suspendisse quis velit. Integer sit amet lacus. Curabitur tristique. Morbi eu lectus. Vestibulum tristique aliquam quam. Sed neque.</p>
+					<p>Nulla facilisi. Quisque eleifend libero. Sed eros. Morbi vel leo. Morbi varius tincidunt sem. Nam sodales volutpat velit. Suspendisse potenti. Duis vehicula pede non nisi. Proin elit pede, ultrices non, ultrices quis, vulputate sit amet, magna. Praesent sodales pellentesque justo. Donec blandit, augue id convallis congue, magna libero hendrerit erat, id blandit est lorem a tellus. Vestibulum tincidunt lectus quis metus. Pellentesque placerat lacus in urna.</p>
+				</li>				
+				<li>
+					<h2>Section 4</h2>
+					<p>Nullam et sem eget massa pellentesque dapibus. Nulla sollicitudin enim quis odio. Quisque ipsum lorem, volutpat eget, condimentum ac, posuere id, risus. Suspendisse tortor metus, aliquet in, varius nec, hendrerit a, libero. Suspendisse iaculis. Fusce commodo urna ut enim. Fusce tempus eros. Phasellus sodales tellus id dolor. Integer sollicitudin, turpis ac interdum condimentum, enim enim tempus metus, sed imperdiet massa diam nec elit. Mauris ante augue, hendrerit non, commodo ac, porttitor eu, turpis.</p>
+					<p>In fermentum nibh ut diam. Mauris sagittis, tellus ac molestie fermentum, arcu orci pharetra mi, id vehicula massa leo vel pede. Nullam semper tincidunt lorem. Proin arcu libero, auctor sed, interdum egestas, ullamcorper et, lacus. Donec id lectus eget diam accumsan ullamcorper. Donec at urna et lacus condimentum pellentesque. Phasellus dapibus hendrerit massa. Sed sed ipsum. Quisque venenatis. Donec vel turpis.</p>
+				</li>
+				<li>
+					<h2>Section 5</h2>
+					<p>Nullam et sem eget massa pellentesque dapibus. Nulla sollicitudin enim quis odio. Quisque ipsum lorem, volutpat eget, condimentum ac, posuere id, risus. Suspendisse tortor metus, aliquet in, varius nec, hendrerit a, libero. Suspendisse iaculis. Fusce commodo urna ut enim. Fusce tempus eros. Phasellus sodales tellus id dolor. Integer sollicitudin, turpis ac interdum condimentum, enim enim tempus metus, sed imperdiet massa diam nec elit. Mauris ante augue, hendrerit non, commodo ac, porttitor eu, turpis.</p>
+					<p>In fermentum nibh ut diam. Mauris sagittis, tellus ac molestie fermentum, arcu orci pharetra mi, id vehicula massa leo vel pede. Nullam semper tincidunt lorem. Proin arcu libero, auctor sed, interdum egestas, ullamcorper et, lacus. Donec id lectus eget diam accumsan ullamcorper. Donec at urna et lacus condimentum pellentesque. Phasellus dapibus hendrerit massa.</p>
+				</li>
+			</ul>
+		</div>
+		<img class="next" src="img/next.gif" alt="next" width="42" height="53" />
+	</div>
+	
+	<p class="separator message">
+		This plugin can be used for navigation purposes. You decide how many to show at a time with CSS.<br />
+		The items don't need to be aligned, you can spread them as much as you want, it will always find them :)<br />
+		Check jQuery.ScrollTo's demo if you want to create the perfect animation. You can use its settings too!
+	</p>
+	
+	<div id="screen2">
+		<div id="buttons">
+			<a class="prev" href="#">Previous</a>
+			<a class="next" href="#">Next</a>
+			<br class="clear" />
+		</div>
+		<div id="slideshow">
+			<ul>
+				<li><img width="225" height="300" src="http://www.stockvault.net/watermark.php?i=9020" /></li>
+				<li><img width="225" height="300" src="http://www.stockvault.net/watermark.php?i=8430" /></li>
+				<li><img width="225" height="300" src="http://www.stockvault.net/watermark.php?i=7898" /></li>
+				<li><img width="225" height="300" src="http://www.stockvault.net/watermark.php?i=7894" /></li>
+				<li><img width="225" height="300" src="http://www.stockvault.net/watermark.php?i=3526" /></li>
+				<li><img width="225" height="300" src="http://www.stockvault.net/watermark.php?i=7863" /></li>
+				<li><img width="225" height="300" src="http://www.stockvault.net/watermark.php?i=7743" /></li>
+				<li><img width="225" height="300" src="http://www.stockvault.net/watermark.php?i=7150" /></li>
+				<li><img width="225" height="300" src="http://www.stockvault.net/watermark.php?i=7164" /></li>
+				<li><img width="225" height="300" src="http://www.stockvault.net/watermark.php?i=7149" /></li>
+				<li><img width="225" height="300" src="http://www.stockvault.net/watermark.php?i=4922" /></li>
+				<li><img width="225" height="300" src="http://www.stockvault.net/watermark.php?i=9307" /></li>
+				<li><img width="225" height="300" src="http://www.stockvault.net/watermark.php?i=9922" /></li>
+				<li><img width="225" height="300" src="http://www.stockvault.net/watermark.php?i=9976" /></li>
+			</ul>
+		</div>
+	</div>
+	
+	<p class="separator message">
+		You can also build slideshows with it. In this case, I centered the photos and made them clickable.<br />
+		I set this one to cycle, try going over the last photo. I'm using a special easing equation.<br />
+		You are allowed to interrupt the animation by clicking again. You can't do that in the first one.
+	</p>
+	
+	<div id="ticker-container">
+		<button id="add-news">Append 2 Items</button>
+		<button id="shuffle-news">Shuffle</button>
+		
+		<div id="news-ticker">
+			<div class="first">
+				<h4>News 1</h4>
+				<p>Nullam a leo. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas mollis vestibulum purus, rutrum sed.</p>
+			</div>
+			<div>
+				<h4>News 2</h4>
+				<p>Phasellus nunc ipsum, faucibus non, iaculis ac, sagittis malesuada, augue. Aliquam sollicitudin. Cras iaculis lorem sit amet.</p>
+			</div>
+			<div>
+				<h4>News 3</h4>
+				<p>Morbi condimentum. Sed id nunc eu arcu aliquet bibendum. Maecenas vestibulum eros fringilla tortor. Nunc purus.</p>
+			</div>
+			<div>
+				<h4>News 4</h4>
+				<p>Sed condimentum. Duis orci. Ut odio leo, dapibus pretium, rhoncus a, sodales eu, nibh. Vivamus consectetuer vestibulum.</p>
+			</div>
+			<div>
+				<h4>News 5</h4>
+				<p>Pellentesque varius ligula et enim. Nulla ut purus vel magna ullamcorper vestibulum. Aliquam at enim at ligula bibendum.</p>
+			</div>
+			<div>
+				<h4>News 6</h4>
+				<p>Suspendisse id quam at lectus placerat dignissim. Praesent nulla urna, rutrum sed. Maecenas vitae libero ac elit.</p>
+			</div>
+			<div>
+				<h4>News 7</h4>
+				<p>Etiam aliquet. Nulla consectetuer, nibh ut gravida consectetuer, nisl enim vestibulum nibh. Suspendisse potenti.</p>
+			</div>
+			<div>
+				<h4>News 8</h4>
+				<p>Aliquam porta, nisi id aliquam posuere, enim mi bibendum tellus, non venenatis nisi orci at mi. Curabitur placerat.</p>
+			</div>
+		</div>
+	</div>
+	
+	<p class="separator message">
+		It can be used for news tickers as well. The plugin is not restricted to clicks or buttons.<br />
+		Here the option 'lazy' is used and it works, click the buttons on the right if you don't trust me :)<br />
+		You can also specify an interval for auto scrolling. To stop the animation, use $().stop() on the container.
+	</p>
+	
+	<p id="general" class="side message">
+		This demo shows 3 different uses of this plugin. It can certainly be used for others purposes as well.<br />
+		Note that it can be used with any html. This is not a widget and the examples are just improvised.<br />
+		Use "View source" to see the different calls and markup. All the settings are commented.		
+	</p>
+	
+	<p id="extra" class="side message">
+		This plugin won't modify your html at all, won't even touch a single style.<br />
+		It gives you full control over the markup and the look, that's your part of the job :)<br />
+		You can control the animation from outside with the 3 exposed events (prev, next, goto).<br />
+		Guess what ? If you manage to show them scrollbars, users with no javascript can still navigate your content!
+	</p>
+	
+	<div id="links">
+		<h3>Links</h3>
+		<ul>
+			<li><a target="_blank" href="http://plugins.jquery.com/project/SerialScroll">Project Page</a></li>
+			<li><a target="_blank" href="http://flesler.blogspot.com/2008/02/jqueryserialscroll.html">Blog entry</a></li>
+			<li><a href="http://flesler.webs.com/jQuery.ScrollTo/" rel="prev" rev="next" type="text/html">jQuery.ScrollTo's Demo</a></li>
+		</ul>
+	</div>
+</body>
+</html>
