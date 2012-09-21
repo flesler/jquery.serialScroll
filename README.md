@@ -1,4 +1,13 @@
-jQuery.SerialScroll
+# jQuery.SerialScroll
+
+### Installation and usage
+
+Using [bower](https://github.com/twitter/bower):
+```bash
+bower install jquery.serialScroll
+```
+
+### Notes
 
 * The plugin requires jQuery.ScrollTo. http://github.com/flesler/jquery.scrollTo
 
