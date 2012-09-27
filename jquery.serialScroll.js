@@ -150,7 +150,7 @@
 			};
 
 			function jump( e, pos ){
-				if( isNaN(pos) )
+				if( !$.isNumeric(pos) )
 					pos = e.data;
 
 				var	n, 
