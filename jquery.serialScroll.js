@@ -149,9 +149,12 @@
 				jump( e, this );
 			};
 
-			function jump( e, pos ){
+			function jump( e, pos, duration ){
 				if( isNaN(pos) )
 					pos = e.data;
+
+				if( isNaN(duration) )
+					duration = settings.duration;
 
 				var	n, 
 					// Is a real event triggering ?
@@ -159,8 +162,7 @@
 					// Handle a possible exclude
 					$items = settings.exclude ? getItems().slice(0,-settings.exclude) : getItems(),
 					limit = $items.length - 1,
-					elem = $items[pos],
-					duration = settings.duration;
+					elem = $items[pos];
 
 				if( real )
 					e.preventDefault();
