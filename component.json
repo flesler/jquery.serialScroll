@@ -1,6 +1,6 @@
 {
   "name": "jquery.serialScroll",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description":  "Animated scrolling of series.",
   "homepage": "https://github.com/flesler/jquery.serialScroll",
   "main": [

@@ -3,7 +3,7 @@
 	"title": "Ariel Flesler's jQuery serialScroll",
 	"description": "Animated scrolling of series.",
 	"keywords": ["slideshow", "sequence", "animated", "animation", "scrolling", "scroll", "prev", "next"],
-	"version": "1.2.3",
+	"version": "1.2.4",
 	"author": {
 		"name": "Ariel Flesler",
 		"email": "aflesler@gmail.com",

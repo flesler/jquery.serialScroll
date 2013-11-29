@@ -5,7 +5,7 @@
  *
  * @projectDescription Animated scrolling of series.
  * @author Ariel Flesler
- * @version 1.2.3
+ * @version 1.2.4
  *
  * http://flesler.blogspot.com/2008/02/jqueryserialscroll.html
  */
