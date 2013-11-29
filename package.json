@@ -4,10 +4,12 @@
   "description": "Animated scrolling of series.",
   "homepage": "https://github.com/flesler/jquery.serialScroll",
   "main": [
-    "./jquery.serialScroll.js"
+    "./jquery.serialScroll.js",
+    "./jquery.serialScroll.min.js"
   ],
   "dependencies": {
-    "jquery": ">=1.8"
+    "jquery": ">=1.8",
+    "jquery.scrollTo" : ">=1.4.3"
   },
   "keywords": [ "slideshow", "sequence", "animated", "animation", "scrolling", "scroll", "prev", "next" ],
   "author": {
