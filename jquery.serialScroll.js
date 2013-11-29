@@ -1,23 +1,13 @@
 /*!
  * jQuery.SerialScroll
- * Copyright (c) 2007-2010 Ariel Flesler - aflesler(at)gmail(dot)com | http://flesler.blogspot.com
- * Dual licensed under MIT and GPL.
- * Date: 05/31/2010
+ * Copyright (c) 2007-2013 Ariel Flesler - aflesler<a>gmail<d>com | http://flesler.blogspot.com
+ * Licensed under MIT.
  *
  * @projectDescription Animated scrolling of series.
  * @author Ariel Flesler
- * @version 1.2.3b
+ * @version 1.2.3
  *
- * @id jQuery.serialScroll
- * @id jQuery.fn.serialScroll
- * @param {Object} settings Hash of settings, it is passed in to jQuery.ScrollTo, none is required.
- * @return {jQuery} Returns the same jQuery object, for chaining.
- *
- * @link {http://flesler.blogspot.com/2008/02/jqueryserialscroll.html Homepage}
- *
- * Notes:
- *	- The plugin requires jQuery.ScrollTo.
- *	- The hash of settings, is passed to jQuery.ScrollTo, so its settings can be used as well.
+ * http://flesler.blogspot.com/2008/02/jqueryserialscroll.html
  */
 ;(function( $ ){
 

@@ -1,9 +1,13 @@
+1.2.3
 [Enhancement]
 - Removed a redundant code
 - If there's no matched container ('target') serialScroll just ignores the call.
 - The setting 'interval' implicitely assumes 'force' as true.
 [Fix]
 - The setting 'stop' wasn't working on window.
+[Misc]
+- Changed licensing to MIT
+- Repo is compliant with official jquery plugins repository
 
 1.2.2
 [Enhancement]

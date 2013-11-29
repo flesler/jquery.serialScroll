@@ -1,0 +1,29 @@
+{
+	"name": "serialScroll",
+	"title": "Ariel Flesler's jQuery serialScroll",
+	"description": "Easy element scrolling using jQuery.",
+	"keywords": ["slideshow", "sequence", "animated", "animation", "scrolling", "scroll", "prev", "next"],
+	"version": "1.2.3",
+	"author": {
+		"name": "Ariel Flesler",
+		"email": "aflesler@gmail.com",
+		"url": "http://flesler.blogspot.com"
+	},
+	"maintainers": [{
+		"name": "Ariel Flesler",
+		"email": "aflesler@gmail.com",
+		"url": "http://flesler.blogspot.com"
+	}],
+	"licenses": [{
+		"type": "MIT",
+		"url": "https://github.com/flesler/jquery.serialScroll/blob/master/LICENSE"
+	}],
+	"homepage": "https://github.com/flesler/jquery.serialScroll",
+	"docs": "https://github.com/flesler/jquery.serialScroll",
+	"bugs": "https://github.com/flesler/jquery.serialScroll/issues",
+	"download": "https://github.com/flesler/jquery.serialScroll/releases",
+	"demo": "http://demos.flesler.com/jquery/serialScroll",
+	"dependencies": {
+		"jquery": ">=1.8"
+	}
+}
