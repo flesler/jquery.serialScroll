@@ -5,7 +5,7 @@
   "homepage": "https://github.com/flesler/jquery.serialScroll",
   "main": [
     "./jquery.serialScroll.js",
-    "./jquery.serialScroll-min.js"
+    "./jquery.serialScroll.min.js"
   ],
   "dependencies": {
     "jquery" : "~1.8",

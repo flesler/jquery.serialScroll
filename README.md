@@ -7,6 +7,10 @@ Using [bower](https://github.com/twitter/bower):
 bower install jquery.serialScroll
 ```
 
+### Downloading Manually
+
+If you want the latest stable version, get the latest release from the [releases page](https://github.com/flesler/jquery.serialScroll/releases).
+
 ### Notes
 
 * The plugin requires jQuery.ScrollTo. http://github.com/flesler/jquery.scrollTo
