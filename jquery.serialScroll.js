@@ -142,7 +142,10 @@
 			function jump( e, pos ){
 				if( isNaN(pos) )
 					pos = e.data;
-
+				// jump should ignore events where e.data (pos) isn't a number
+				if( typeof pos !== "number" )
+					return;
+				
 				var	n, 
 					// Is a real event triggering ?
 					real = e.type, 
