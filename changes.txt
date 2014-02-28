@@ -1,3 +1,7 @@
+1.2.4.1
+[Misc]
+- Using $.isNumeric instead of isNaN
+
 1.2.4
 [Misc]
 - Re-releasing for the jQuery plugins site

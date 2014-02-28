@@ -1,11 +1,11 @@
 /*!
  * jQuery.SerialScroll
- * Copyright (c) 2007-2013 Ariel Flesler - aflesler<a>gmail<d>com | http://flesler.blogspot.com
+ * Copyright (c) 2007-2014 Ariel Flesler - aflesler<a>gmail<d>com | http://flesler.blogspot.com
  * Licensed under MIT.
  *
  * @projectDescription Animated scrolling of series.
  * @author Ariel Flesler
- * @version 1.2.4
+ * @version 1.2.4.1
  *
  * http://flesler.blogspot.com/2008/02/jqueryserialscroll.html
  */
@@ -140,7 +140,7 @@
 			};
 
 			function jump( e, pos ){
-				if( isNaN(pos) )
+				if( !$.isNumeric(pos) )
 					pos = e.data;
 
 				var	n, 
@@ -218,7 +218,7 @@
 			
 			function index( elem ){
 				// Already a number
-				if( !isNaN(elem) )
+				if( $.isNumeric(elem) )
 					return elem;
 
 				var $items = getItems(), i;
