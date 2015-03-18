@@ -9,6 +9,13 @@ Via [npm](https://www.npmjs.com/package/jquery.serialscroll):
 npm install jquery.serialscroll
 ```
 
+### Using a public CDN
+
+CDN provided by [jsdelivr](http://www.jsdelivr.com/#!jquery.serialscroll)
+```html
+<script src="//cdn.jsdelivr.net/jquery.serialscroll/1.3.0/jquery.serialScroll.min.js"></script>
+```
+
 ### Downloading Manually
 
 If you want the latest stable version, get the latest release from the [releases page](https://github.com/flesler/jquery.serialScroll/releases).
