@@ -8,7 +8,7 @@
 	<meta name="robots" content="index,follow" />
 	<link type="text/css" rel="stylesheet" href="css/style.css" />
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-	<script type="text/javascript" src="../jquery.scrollTo.js"></script>
+	<script type="text/javascript" src="./js/jquery.scrollTo.min.js"></script>
 	<script type="text/javascript" src="../jquery.serialScroll.js"></script>
 	<script type="text/javascript">	
 		// Easing equation, borrowed from jQuery easing plugin
@@ -70,8 +70,9 @@
 					 */
 					 //those arguments with a $ are jqueryfied, elem isn't.
 					e.preventDefault();
-					if( this.blur )
+					if (this.blur) {
 						this.blur();
+					}
 				},
 				onAfter:function( elem ){
 					//'this' is the element being scrolled ($pane) not jqueryfied
@@ -143,7 +144,7 @@
 	</style>
 </head>
 <body>
-	<h1>jQuery.SerialScroll&nbsp;<strong>by Ariel Flesler</strong></h1>
+	<h1>jQuery.SerialScroll</h1>
 	<div id="screen">
 		<img class="prev" src="img/prev.gif" alt="prev" width="42" height="53" />
 		<div id="navigation">
@@ -199,20 +200,19 @@
 		</div>
 		<div id="slideshow">
 			<ul>
-				<li><img width="225" height="300" src="http://www.stockvault.net/watermark.php?i=9020" /></li>
-				<li><img width="225" height="300" src="http://www.stockvault.net/watermark.php?i=8430" /></li>
-				<li><img width="225" height="300" src="http://www.stockvault.net/watermark.php?i=7898" /></li>
-				<li><img width="225" height="300" src="http://www.stockvault.net/watermark.php?i=7894" /></li>
-				<li><img width="225" height="300" src="http://www.stockvault.net/watermark.php?i=3526" /></li>
-				<li><img width="225" height="300" src="http://www.stockvault.net/watermark.php?i=7863" /></li>
-				<li><img width="225" height="300" src="http://www.stockvault.net/watermark.php?i=7743" /></li>
-				<li><img width="225" height="300" src="http://www.stockvault.net/watermark.php?i=7150" /></li>
-				<li><img width="225" height="300" src="http://www.stockvault.net/watermark.php?i=7164" /></li>
-				<li><img width="225" height="300" src="http://www.stockvault.net/watermark.php?i=7149" /></li>
-				<li><img width="225" height="300" src="http://www.stockvault.net/watermark.php?i=4922" /></li>
-				<li><img width="225" height="300" src="http://www.stockvault.net/watermark.php?i=9307" /></li>
-				<li><img width="225" height="300" src="http://www.stockvault.net/watermark.php?i=9922" /></li>
-				<li><img width="225" height="300" src="http://www.stockvault.net/watermark.php?i=9976" /></li>
+				<li><img width="225" height="300" src="http://lorempixel.com/225/300/abstract" /></li>
+				<li><img width="225" height="300" src="http://lorempixel.com/225/300/animals" /></li>
+				<li><img width="225" height="300" src="http://lorempixel.com/225/300/business" /></li>
+				<li><img width="225" height="300" src="http://lorempixel.com/225/300/cats" /></li>
+				<li><img width="225" height="300" src="http://lorempixel.com/225/300/city" /></li>
+				<li><img width="225" height="300" src="http://lorempixel.com/225/300/food" /></li>
+				<li><img width="225" height="300" src="http://lorempixel.com/225/300/nightlife" /></li>
+				<li><img width="225" height="300" src="http://lorempixel.com/225/300/fashion" /></li>
+				<li><img width="225" height="300" src="http://lorempixel.com/225/300/people" /></li>
+				<li><img width="225" height="300" src="http://lorempixel.com/225/300/nature" /></li>
+				<li><img width="225" height="300" src="http://lorempixel.com/225/300/sports" /></li>
+				<li><img width="225" height="300" src="http://lorempixel.com/225/300/technics" /></li>
+				<li><img width="225" height="300" src="http://lorempixel.com/225/300/transport" /></li>
 			</ul>
 		</div>
 	</div>
@@ -285,9 +285,9 @@
 	<div id="links">
 		<h3>Links</h3>
 		<ul>
-			<li><a target="_blank" href="http://plugins.jquery.com/project/SerialScroll">Project Page</a></li>
-			<li><a target="_blank" href="http://flesler.blogspot.com/2008/02/jqueryserialscroll.html">Blog entry</a></li>
-			<li><a href="http://flesler.webs.com/jQuery.ScrollTo/" rel="prev" rev="next" type="text/html">jQuery.ScrollTo's Demo</a></li>
+			<li><a target="_blank" href="https://github.com/flesler/jquery.serialScroll">Github</a></li>
+			<li><a target="_blank" href="http://flesler.blogspot.com/2008/02/jqueryserialscroll.html">Documentation</a></li>
+			<li><a href="http://demos.flesler.com/jquery/scrollTo/" rel="prev" rev="next" type="text/html">jQuery.scrollTo's Demo</a></li>
 		</ul>
 	</div>
 </body>
