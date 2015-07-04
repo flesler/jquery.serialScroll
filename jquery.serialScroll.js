@@ -4,7 +4,7 @@
  * Licensed under MIT.
  * @projectDescription Animated scrolling of series with jQuery
  * @author Ariel Flesler
- * @version 1.3.0
+ * @version 1.3.1
  * https://github.com/flesler/jquery.serialScroll
  */
 ;(function($) {
