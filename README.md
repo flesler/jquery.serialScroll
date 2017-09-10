@@ -13,7 +13,7 @@ npm install jquery.serialscroll
 
 CDN provided by [jsdelivr](http://www.jsdelivr.com/#!jquery.serialscroll)
 ```html
-<script src="//cdn.jsdelivr.net/jquery.serialscroll/1.3.0/jquery.serialScroll.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/jquery.serialscroll@1.3.0/jquery.serialScroll.min.js"></script>
 ```
 
 ### Downloading Manually
