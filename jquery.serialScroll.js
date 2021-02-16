@@ -1,6 +1,6 @@
 /*!
  * jQuery.serialScroll
- * Copyright (c) 2007-2015 Ariel Flesler - aflesler<a>gmail<d>com | http://flesler.blogspot.com
+ * Copyright (c) 2007 Ariel Flesler - aflesler<a>gmail<d>com | https://github.com/flesler
  * Licensed under MIT.
  * @projectDescription Animated scrolling of series with jQuery
  * @author Ariel Flesler

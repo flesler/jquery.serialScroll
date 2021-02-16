@@ -5,11 +5,11 @@
 	"main": "jquery.serialScroll.js",
 	"author": {
 		"name": "Ariel Flesler",
-		"url": "http://flesler.blogspot.com"
+		"url": "https://github.com/flesler"
 	},
 	"licenses": "MIT",
 	"homepage": "https://github.com/flesler/jquery.serialScroll",
-	"docs": "http://flesler.blogspot.com/2008/02/jqueryserialscroll.html",
+	"docs": "https://github.com/flesler/2008/02/jqueryserialscroll.html",
 	"bugs": "https://github.com/flesler/jquery.serialScroll/issues",
 	"download": "https://github.com/flesler/jquery.serialScroll/releases",
 	"repository": "git://github.com/flesler/jquery.serialScroll",

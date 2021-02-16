@@ -1,3 +1,8 @@
+1.3.2
+[Misc]
+- Import jQuery.isNumeric since it's deprecated (fixes #17)
+- Switch jQuery.fn.bind to jQuery.fn.on (fixes #16)
+
 1.3.1
 [Misc]
 - Bower name made lower case
