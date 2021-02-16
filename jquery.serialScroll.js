@@ -95,37 +95,37 @@
 			}
 
 			// Button binding, optional
-			$(settings.prev||[], context).bind(event, -step, move);
-			$(settings.next||[], context).bind(event, step, move);
+			$(settings.prev||[], context).on(event, -step, move);
+			$(settings.next||[], context).on(event, step, move);
 
 			// Custom events bound to the container
 			if (!pane._bound_) {
 				$pane
 					 // You can trigger with just 'prev'
-					.bind('prev'+NAMESPACE, -step, move)
+					.on('prev'+NAMESPACE, -step, move)
 					// f.e: $(container).trigger('next');
-					.bind('next'+NAMESPACE, step, move)
+					.on('next'+NAMESPACE, step, move)
 					// f.e: $(container).trigger('goto', 4);
-					.bind('goto'+NAMESPACE, jump);
+					.on('goto'+NAMESPACE, jump);
 			}
 
 			if (auto) {
 				$pane
-					.bind('start'+NAMESPACE, function(e) {
+					.on('start'+NAMESPACE, function(e) {
 						if (!auto) {
 							clear();
 							auto = true;
 							next();
 						}
 					 })
-					.bind('stop'+NAMESPACE, function() {
+					.on('stop'+NAMESPACE, function() {
 						clear();
 						auto = false;
 					});
 			}
 
 			// Let serialScroll know that the index changed externally
-			$pane.bind('notify'+NAMESPACE, function(e, elem) {
+			$pane.on('notify'+NAMESPACE, function(e, elem) {
 				var i = index(elem);
 				if (i > -1) {
 					active = i;
@@ -137,13 +137,13 @@
 
 			// Can't use jump if using lazy items and a non-bubbling event
 			if (settings.jump) {
-				(lazy ? $pane : getItems()).bind(event, function(e) {
+				(lazy ? $pane : getItems()).on(event, function(e) {
 					jump(e, index(e.target));
 				});
 			}
 
 			if (nav) {
-				nav = $(nav, context).bind(event, function(e) {
+				nav = $(nav, context).on(event, function(e) {
 					e.data = Math.round(getItems().length / nav.length) * nav.index(this);
 					jump(e, this);
 				});
